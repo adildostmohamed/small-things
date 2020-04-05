@@ -9,6 +9,8 @@ const schemaDirectives = require("./directives");
 
 connectDB();
 
+console.log(resolvers);
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,

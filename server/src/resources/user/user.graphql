@@ -13,6 +13,7 @@ type User {
   email: String!
   password: String!
   role: Role
+  things: [Thing]
 }
 
 type AuthPayload {

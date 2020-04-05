@@ -1,0 +1,64 @@
+enum Recurring {
+  NONE
+  DAILY
+  WEEKDAY
+  WEEKEND
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+enum Category {
+  WORK
+  PERSONAL
+  OTHER
+  UNKNOWN
+}
+
+enum Status {
+  CREATED
+  COMPLETED
+  NOTCOMPLETED
+}
+
+type Thing {
+  id: ID!
+  owner: User!
+  content: String!
+  date: String!
+  recurring: Recurring
+  category: Category
+  status: Status
+}
+
+input NewThingInput {
+  content: String!
+  date: String!
+  recurring: Recurring = NONE
+  category: Category = UNKNOWN
+  status: Status = CREATED
+}
+
+input UpdateThingInput {
+  id: ID!
+  content: String
+  date: String
+  recurring: Recurring
+  category: Category
+  status: Status
+}
+
+extend type Query {
+  getUserThings: [Thing]!
+  getUserThing(id: ID!): Thing!
+}
+
+extend type Mutation {
+  createThing(input: NewThingInput): Thing!
+  updateThing(input: UpdateThingInput): Thing!
+  deleteThing(id: ID!): Thing!
+}

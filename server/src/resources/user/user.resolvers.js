@@ -54,6 +54,7 @@ const adminDeleteUser = async (_, args, ctx) => {
 };
 
 const signup = async (_, args, ctx) => {
+  console.log(args);
   const existingUser = await ctx.models.User.findOne({
     email: args.input.email,
   });
@@ -90,5 +91,10 @@ module.exports = {
     login,
     updateCurrentUser,
     deleteCurrentUser,
+  },
+  User: {
+    things: (root, args, ctx) => {
+      return ctx.models.Thing.find({ owner: root.id });
+    },
   },
 };
