@@ -1,0 +1,35 @@
+{
+  "name": "gql-auth-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adildostmohamed/gql-auth-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adildostmohamed/gql-auth-starter/issues"
+  },
+  "homepage": "https://github.com/adildostmohamed/gql-auth-starter#readme",
+  "dependencies": {
+    "apollo-server": "^2.11.0",
+    "bcrypt": "^4.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.7"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^2.0.2"
+  }
+}

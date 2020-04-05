@@ -1,0 +1,75 @@
+directive @authorization(role: Role = USER) on OBJECT | FIELD_DEFINITION
+directive @authentication on FIELD_DEFINITION
+
+enum Role {
+  ADMIN
+  USER
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  role: Role
+}
+
+type AuthPayload {
+  user: User!
+  token: String!
+}
+
+input AdminNewUserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  role: Role = USER
+}
+
+input AdminUpdateUserInput {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+  role: Role
+}
+
+input UpdateCurrentUserInput {
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input SignUpInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  role: Role = USER
+}
+
+type Query {
+  currentUser: User! @authentication
+  user(id: ID!): User! @authorization(role: ADMIN)
+  users: [User]! @authorization(role: ADMIN)
+}
+
+type Mutation {
+  adminCreateUser(input: AdminNewUserInput!): User! @authorization(role: ADMIN)
+  adminUpdateUser(input: AdminUpdateUserInput!): User!
+    @authorization(role: ADMIN)
+  adminDeleteUser(id: ID!): User! @authorization(role: ADMIN)
+  login(input: LoginInput!): AuthPayload!
+  signup(input: SignUpInput!): AuthPayload!
+  updateCurrentUser(input: UpdateCurrentUserInput): User! @authentication
+  deleteCurrentUser: User!
+}
