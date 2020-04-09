@@ -50,7 +50,7 @@ input LoginInput {
   password: String!
 }
 
-input SignUpInput {
+input SignupInput {
   firstName: String!
   lastName: String!
   email: String!
@@ -70,7 +70,7 @@ type Mutation {
     @authorization(role: ADMIN)
   adminDeleteUser(id: ID!): User! @authorization(role: ADMIN)
   login(input: LoginInput!): AuthPayload!
-  signup(input: SignUpInput!): AuthPayload!
+  signup(input: SignupInput!): AuthPayload!
   updateCurrentUser(input: UpdateCurrentUserInput): User! @authentication
   deleteCurrentUser: User!
 }

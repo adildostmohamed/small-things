@@ -9,15 +9,13 @@ const schemaDirectives = require("./directives");
 
 connectDB();
 
-console.log(resolvers);
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   schemaDirectives,
   context: async ({ req }) => {
-    const token = req.headers.authorization;
-    const user = await getUserFromToken(token);
+    const authHeader = req.headers.authorization;
+    const user = await getUserFromToken(authHeader);
     return { models, user, createUserToken };
   },
 });

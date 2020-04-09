@@ -8,8 +8,9 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const createUserToken = ({ id, role }) =>
   jwt.sign({ id, role }, JWT_SECRET, { expiresIn: "30 days" });
 
-const getUserFromToken = async (token) => {
+const getUserFromToken = async (authorizationHeader) => {
   try {
+    const token = authorizationHeader.replace("Bearer ", "");
     // get the user id from the token
     const user = jwt.verify(token, JWT_SECRET);
     const userProfile = await userModel.findById(user.id);
@@ -19,25 +20,7 @@ const getUserFromToken = async (token) => {
   }
 };
 
-const authenticated = (next) => (root, args, context, info) => {
-  if (!context.user) {
-    throw new AuthenticationError("must authenticate");
-  }
-
-  return next(root, args, context, info);
-};
-
-const authorized = (role, next) => (root, args, context, info) => {
-  if (context.user.role !== role) {
-    throw new AuthenticationError(`you must have ${role} role`);
-  }
-
-  return next(root, args, context, info);
-};
-
 module.exports = {
   getUserFromToken,
-  authenticated,
-  authorized,
   createUserToken,
 };
