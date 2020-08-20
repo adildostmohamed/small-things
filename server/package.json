@@ -21,7 +21,7 @@
   "homepage": "https://github.com/adildostmohamed/gql-auth-starter#readme",
   "dependencies": {
     "apollo-server": "^2.11.0",
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
     "lodash.merge": "^4.6.2",
     "mongoose": "^5.9.7"
